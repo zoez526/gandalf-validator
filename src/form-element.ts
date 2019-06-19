@@ -44,6 +44,14 @@ class FormElement {
   constructor(props: formElementProps) {
     if (!props) throw 'field object is required';
 
+    const getValueFromDefault = (defaultValue) => {
+      if (defaultValue === null || defaultValue === undefined) {
+        return '';
+      } else {
+        return defaultValue;
+      }
+    }
+
     this.name = props.name;
     this.key = props.name;
     this.component = props.component;
@@ -59,7 +67,7 @@ class FormElement {
 
     this.pristine = true;
     this.errorMessage = '';
-    this.value = props.defaultValue || '';
+    this.value = getValueFromDefault(props.defaultValue);
     this.timeOut = null;
     this.element = this.createReactElement();
   }
